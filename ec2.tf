@@ -231,11 +231,11 @@ resource "aws_instance" "ec2" {
     #delete_on_termination = false
   }
 
-  user_data  = templatefile("./ec2_user_data.sh", {
-    clickhouse-shard-0-private_ip = "${aws_instance.ec2[0].private_ip}"
-    clickhouse-shard-1-private_ip = "${aws_instance.ec2[1].private_ip}"
-    clickhouse-shard-2-private_ip = "${aws_instance.ec2[2].private_ip}"
-  })
+#   user_data  = templatefile("./ec2_user_data.sh", {
+#     clickhouse-shard-0-private_ip = "${aws_instance.ec2[0].private_ip}"
+#     clickhouse-shard-1-private_ip = "${aws_instance.ec2[1].private_ip}"
+#     clickhouse-shard-2-private_ip = "${aws_instance.ec2[2].private_ip}"
+#   })
 
 
   tags = {
