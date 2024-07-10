@@ -1,10 +1,11 @@
 This repository contains Clickhouse cluster in 3 nodes with Zookeeper deployed in 3 Vagrant VMs
 
 ### Versions
-Operating system: Linux CentOS 8
-Java: java-1.8.0
-Zookeeper: 3.9.2
-Clickhouse server: 24.6.2.17
+- Operating system: Linux CentOS 8
+- Java: java-1.8.0
+- Zookeeper: 3.9.2
+- Clickhouse server: 24.6.2.17
+- Clickhouse client: 24.6.2.17
 
 Clickhouse config source - https://gist.githubusercontent.com/iliusa77/f7ad4bba2417a859eb222059642ff9b8/raw/6fc2055420330a3d81e8ce613e735fe34e79dee1/clickhouse-server-config.xml
 
