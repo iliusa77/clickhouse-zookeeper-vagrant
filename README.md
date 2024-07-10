@@ -1,4 +1,4 @@
-This repository contains Clickhouse cluster in 3 nodes with Zookeeper deployed in 3 Vagrant VMs
+This repository contains Clickhouse cluster in 3 nodes with Zookeeper deployed in 3 Vagrant VMs or in EC2 instances
 
 ### Versions
 - Operating system: Linux CentOS 8
@@ -9,6 +9,8 @@ This repository contains Clickhouse cluster in 3 nodes with Zookeeper deployed i
 
 Clickhouse config source - https://gist.githubusercontent.com/iliusa77/f7ad4bba2417a859eb222059642ff9b8/raw/6fc2055420330a3d81e8ce613e735fe34e79dee1/clickhouse-server-config.xml
 
+
+## Vagrant
 Run cluster deploy
 ```
 vagrant up
@@ -149,4 +151,40 @@ Code: 33. DB::Exception: Cannot read all data. Bytes read: 0. Bytes expected: 4.
 Code: 33. DB::Exception: Cannot read all data. Bytes read: 0. Bytes expected: 4.: while receiving handshake from ZooKeeper. (CANNOT_READ_ALL_DATA) (version 24.6.2.17 (official build)), 127.0.1.1:2181
 . (KEEPER_EXCEPTION)
 
+```
+
+## EC2 (Terraform)
+
+### Create S3 bucket for tfstate and DynamoDB table with LockID Partition key for locks Terraform execution
+get S3 bucket name and DynamoDB table name from `providers.tf`
+```
+  backend "s3" {
+    bucket         = "clickhouse-ec2-terraform-state"
+    key            = "terraform.tfstate"
+    region         = "eu-west-2"
+    dynamodb_table = "clickhouse-ec2-terraform"
+  }
+```
+
+### Generate SSH pair
+```
+ssh-keygen -t rsa -b 4096 -f ./clickhouse-ssh-key
+chmod 400 clickhouse-ssh-key
+```
+
+### Update Terraform variables
+Define you own values in `vars.tf`
+- put clickhouse-ssh-key.pub content in public_key
+- env
+- region
+
+and so on ...
+
+### Terraform init/plan/apply
+```
+terraform init
+
+terraform plan
+
+terraform apply -auto-approve
 ```
